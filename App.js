@@ -1,13 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View } from 'react-native';
+import { CubeNavigationHorizontal } from 'react-native-3dcube-navigation';
+import {AddLocation} from './screens/AddLocation';
+import {SearchLocation} from './screens/SearchLocation';
+import {DisplayLocation} from './screens/DisplayLocation';
+
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <View style={styles.father} >
+      <CubeNavigationHorizontal ref={view => { this.cube = view; }}>
+        <View style={[styles.container, { backgroundColor: '#5CDB8B' }]}>
+          <AddLocation/>
+        </View>
+        <View style={[styles.container, { backgroundColor: '#A3F989' }]}>
+          <SearchLocation/>
+        </View>
+        <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
+          <DisplayLocation/>
+        </View>
+      </CubeNavigationHorizontal>
+    </View >
+
+
+
+);
 }
 
 const styles = StyleSheet.create({
