@@ -47,4 +47,29 @@ app.put("/hunts", async function(request, response){
     }
 })
 
+app.get("/hunts", async function(request,response){
+    try{
+        console.log("Request received in app.get /hunts");
+        let conn = mysql.createConnection({host: host, user: user, password: password, database: database});
+        await conn.connect();
+
+        let sql = "SELECT * FROM hunts;";
+        console.log("sql statement being used is "+sql);
+
+        await conn.query(sql, function(err, result){
+            if(err){
+                console.log("An error occurred "+err);
+            }
+            else{
+                console.log("SUCCESS");
+                console.log("Result is "+result);
+                response.send(result);
+            }
+        })
+    } catch(error){
+        console.log("An error occurred in path /hunts: "+error);
+        response.send("ERROR");
+    }
+})
+
 app.listen(port, ()=>console.log("server.js listening on port ",port));
