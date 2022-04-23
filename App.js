@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, View } from 'react-native';
 import { CubeNavigationHorizontal } from 'react-native-3dcube-navigation';
 import {AddLocation} from './screens/AddLocation';
@@ -7,6 +6,8 @@ import {DisplayLocation} from './screens/DisplayLocation';
 
 
 export default function App() {
+
+  const []
 
   return (
     <View style={styles.father} >
@@ -18,7 +19,7 @@ export default function App() {
           <SearchLocation/>
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
-          <DisplayLocation/>
+          <DisplayLocation latitude={null} longitude={null} huntName={null} />
         </View>
       </CubeNavigationHorizontal>
     </View >
