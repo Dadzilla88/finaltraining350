@@ -14,7 +14,7 @@ let user = 'root';
 let password = 'mysql';
 let database = 'GeoCacheDB';
 
-app.post("/hunts", async function(request, response){
+app.put("/hunts", async function(request, response){
     try{
         console.log("Request received in app.post /hunts");
         let conn = mysql.createConnection({host: host, user: user, password: password, database: database});
