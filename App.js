@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 
 
 export default function App() {
-
+  const [gridLoading, setGridLoading] = useState(true);
   const [location, setLocation] = useState({
     "coords":{
         latitude: 47.1944,
@@ -38,6 +38,7 @@ export default function App() {
     return(
         <Text>An error has occurred {errorMsg}</Text>)}
 
+
   return (
     <View style={styles.father} >
       <CubeNavigationHorizontal ref={view => { this.cube = view; }}>
@@ -47,7 +48,7 @@ export default function App() {
         </View>
         <View style={[styles.container, { backgroundColor: '#A3F989' }]}>
           <SearchLocation
-            setLocation={setLocation} />
+            setLocation={setLocation} gridLoading={gridLoading} setGridLoading={setGridLoading} />
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
           <DisplayLocation location={location} defaultloc={defaultloc}/>

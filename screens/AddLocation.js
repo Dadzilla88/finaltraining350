@@ -10,18 +10,18 @@ import {DisplayLocation} from "./DisplayLocation";
 
 
 
-export const AddLocation = ({location, defaultloc}) => {
+export const AddLocation = ({location, defaultloc,setGridLoading}) => {
     console.log("This is location in AddLocation: "+location);
 
     const submitValues = (values) => {
-        const res = axios.put('http://10.0.2.2:4000/hunts', {huntName: values.huntName, difficulty: values.difficulty, latitude: values.latitude, longitude: values.longitude}).then(function(result){
+        const res = axios.put('http://35.202.209.186:4000/hunts', {huntName: values.huntName, difficulty: values.difficulty, latitude: values.latitude, longitude: values.longitude}).then(function(result){
             let rep = result.data;
             console.log("This is rep: "+rep);
             if (rep === "DUPENAME"){
                 Alert.alert("That hunt name already exists");
             } else if (rep === "SUCCESS"){
                 Alert.alert("Hunt successfully added");
-                <DisplayLocation hunt={values} />;
+                setGridLoading(true);
             } else {
                 Alert.alert("An error has occurred");
             }
