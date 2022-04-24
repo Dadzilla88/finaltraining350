@@ -11,7 +11,7 @@ import {DisplayLocation} from "./DisplayLocation";
 
 
 export const AddLocation = ({location, defaultloc}) => {
-    console.log(location);
+    console.log("This is location in AddLocation: "+location);
 
     const submitValues = (values) => {
         const res = axios.put('http://10.0.2.2:4000/hunts', {huntName: values.huntName, difficulty: values.difficulty, latitude: values.latitude, longitude: values.longitude}).then(function(result){

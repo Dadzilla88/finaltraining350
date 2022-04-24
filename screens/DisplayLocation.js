@@ -33,7 +33,7 @@ export const DisplayLocation = ({location, defaultloc}) => {
                         longitude: location.coords.longitude,
                     }}>
                         <Callout>
-                            <Text>Name of the Hunt</Text>
+                            <Text>{location.coords.huntName}</Text>
                         </Callout>
                     </Marker>
                 </MapView>

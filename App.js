@@ -10,11 +10,13 @@ import {useEffect, useState} from "react";
 export default function App() {
 
   const [location, setLocation] = useState({
+    "coords":{
         latitude: 47.1944,
         longitude: 95.1653,
         latitudeDelta: 0.04,
-        longitudeDelta: 0.04
-      }
+        longitudeDelta: 0.04,
+        huntName: "Name of the Hunt"
+      }}
   );
   const [errorMsg, setErrorMsg] = useState(null);
   const [defaultloc, setDefaultloc] = useState(true);
