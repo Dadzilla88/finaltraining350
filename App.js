@@ -3,6 +3,9 @@ import { CubeNavigationHorizontal } from 'react-native-3dcube-navigation';
 import {AddLocation} from './screens/AddLocation';
 import {SearchLocation} from './screens/SearchLocation';
 import {DisplayLocation} from './screens/DisplayLocation';
+import {Feedback} from './screens/Feedback';
+import {MoreFeedback} from './screens/MoreFeedback';
+import {Graph} from './screens/Graph';
 import * as Location from "expo-location";
 import {useEffect, useState} from "react";
 
@@ -20,6 +23,7 @@ export default function App() {
   );
   const [errorMsg, setErrorMsg] = useState(null);
   const [defaultloc, setDefaultloc] = useState(true);
+  const [answer, setAnswer] = useState('Yes');
 
   useEffect(()=>{
     (async () =>{
@@ -52,6 +56,15 @@ export default function App() {
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
           <DisplayLocation location={location} defaultloc={defaultloc}/>
+        </View>
+        <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
+          <Feedback setAnswer={setAnswer}/>
+        </View>
+        <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
+          <MoreFeedback answer={answer}/>
+        </View>
+        <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
+          <Graph />
         </View>
       </CubeNavigationHorizontal>
     </View >
