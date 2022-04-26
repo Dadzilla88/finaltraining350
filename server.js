@@ -139,4 +139,24 @@ app.post("/feedback", async function (request, response){
     }
 })
 
+app.get("/feedback",async function(request,response){
+    try{
+        console.log("Request received in app.get /feedback");
+        let conn = mysql.createConnection({host:host,user:user,password:password,database:database});
+        conn.connect();
+        let sql = "SELECT * FROM feedback;";
+        conn.query(sql,function(err,result){
+            if(err) console.log("An error occurred: "+sql)
+            else{
+                console.log("SUCCESS");
+                response.send(result);
+            }
+        })
+        conn.end()
+    }catch(error){
+        console.log("An error has occurred in path /feedback get "+error);
+        response.send("ERROR");
+    }
+})
+
 app.listen(port, ()=>console.log("server.js listening on port ",port));

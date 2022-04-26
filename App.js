@@ -63,7 +63,7 @@ export default function App() {
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
           <MoreFeedback answer={answer} />
         </View>
-        <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
+        <View style={[styles.container, { backgroundColor: 'black' }]}>
           <Graph />
         </View>
       </CubeNavigationHorizontal>
