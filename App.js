@@ -12,6 +12,7 @@ import {useEffect, useState} from "react";
 
 export default function App() {
   const [gridLoading, setGridLoading] = useState(true);
+  const[searchLocation,setSearchLocation] = useState();
   const [location, setLocation] = useState({
     "coords":{
         latitude: 47.1944,
@@ -52,10 +53,10 @@ export default function App() {
         </View>
         <View style={[styles.container, { backgroundColor: '#A3F989' }]}>
           <SearchLocation
-            setLocation={setLocation} gridLoading={gridLoading} setGridLoading={setGridLoading} />
+            setSearchLocation={setSearchLocation} gridLoading={gridLoading} setGridLoading={setGridLoading} setDefaultloc={setDefaultloc} />
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
-          <DisplayLocation location={location} defaultloc={defaultloc}/>
+          <DisplayLocation searchLocation={searchLocation} />
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
           <Feedback setAnswer={setAnswer}/>

@@ -28,7 +28,7 @@ export const MoreFeedback = ({answer}) =>{
                 optionsList.push(key);
             };
         })
-        const res = axios.post('http://10.0.2.2:4000/feedback',{list: optionsList})
+        const res = axios.post('http://35.188.207.65:4000/feedback',{list: optionsList})
 
     }
 

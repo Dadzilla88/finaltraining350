@@ -11,10 +11,9 @@ import {DisplayLocation} from "./DisplayLocation";
 
 
 export const AddLocation = ({location, defaultloc,setGridLoading}) => {
-    console.log("This is location in AddLocation: "+location);
 
     const submitValues = (values) => {
-        const res = axios.put('http://35.202.209.186:4000/hunts', {huntName: values.huntName, difficulty: values.difficulty, latitude: values.latitude, longitude: values.longitude}).then(function(result){
+        const res = axios.put('http://35.188.207.65:4000/hunts', {huntName: values.huntName, difficulty: values.difficulty, latitude: values.latitude, longitude: values.longitude}).then(function(result){
             let rep = result.data;
             console.log("This is rep: "+rep);
             if (rep === "DUPENAME"){

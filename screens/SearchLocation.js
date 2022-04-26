@@ -6,19 +6,20 @@ import {useEffect, useState} from "react";
 import {TouchableOpacity} from "react-native";
 
 
-export const SearchLocation = ({setLocation,gridLoading,setGridLoading}) => {
+export const SearchLocation = ({setSearchLocation,gridLoading,setGridLoading,setDefaultloc}) => {
 
     const pressHandler = (item) =>{
-        setLocation({"coords":{
+        setSearchLocation({"coords":{
             latitude: item.latitude,
             longitude: item.longitude,
             huntName: item.huntName
             }});
+        setDefaultloc(false);
         Alert.alert("The location has been set \n Swipe over to see the map");
     }
 
     const refreshHandler = () =>{
-        const res = axios.get('http://35.202.209.186:4000/hunts').then(function (result) {
+        const res = axios.get('http://35.188.207.65:4000/hunts').then(function (result) {
             let rep = result.data;
             console.log("This is rep: " + rep[0].latitude);
             setHuntList(rep);
@@ -26,7 +27,7 @@ export const SearchLocation = ({setLocation,gridLoading,setGridLoading}) => {
         })
     }
     const searchHandler = () =>{
-        const res = axios.put('http://35.202.209.186:4000/search', {difficulty: text}).then(function(result){
+        const res = axios.put('http://35.188.207.65:4000/search', {difficulty: text}).then(function(result){
             let rep = result.data;
             setHuntList(rep);
         })
@@ -37,7 +38,7 @@ export const SearchLocation = ({setLocation,gridLoading,setGridLoading}) => {
 
 
     if(gridLoading) {
-        const res = axios.get('http://35.202.209.186:4000/hunts').then(function (result) {
+        const res = axios.get('http://35.188.207.65:4000/hunts').then(function (result) {
                 let rep = result.data;
                 console.log("This is rep: " + rep[0].latitude);
                 setHuntList(rep);

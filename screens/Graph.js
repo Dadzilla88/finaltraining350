@@ -21,7 +21,7 @@ export const Graph = () =>{
     const [data,setData] = useState(null);
     const showGraph = () =>{
         console.log("In showGraph ");
-        const res = axios.get('http://10.0.2.2:4000/feedback').then(function(result){
+        const res = axios.get('http://35.188.207.65:4000/feedback').then(function(result){
             let rep = result.data;
             let labels = [];
             let dataA = [];
@@ -49,6 +49,10 @@ export const Graph = () =>{
                     chartConfig={chartConfig}
                     verticalLabelRotation={30}
                 />
+                <Button
+                    title="Refresh"
+                    onPress = {()=>{showGraph()}}
+                    />
             </View>
         )
     }

@@ -9,9 +9,10 @@ import MapView, {Callout, Marker} from 'react-native-maps';
 
 
 
-export const DisplayLocation = ({location, defaultloc}) => {
-    if (defaultloc){
+export const DisplayLocation = ({searchLocation}) => {
+    if (!searchLocation){
         return(
+
             <View style={styles.container}>
                 <MapView style={styles.map}>
                 </MapView>
@@ -22,18 +23,18 @@ export const DisplayLocation = ({location, defaultloc}) => {
             <View style={styles.container}>
                 <MapView style={styles.map}
                          initialRegion={{
-                             latitude: location.coords.latitude,
-                             longitude: location.coords.longitude,
+                             latitude: searchLocation.coords.latitude,
+                             longitude: searchLocation.coords.longitude,
                              latitudeDelta: 0.04,
                              longitudeDelta:0.04
                          }}
                 >
                     <Marker coordinate={{
-                        latitude: location.coords.latitude,
-                        longitude: location.coords.longitude,
+                        latitude: searchLocation.coords.latitude,
+                        longitude: searchLocation.coords.longitude,
                     }}>
-                        <Callout>
-                            <Text>{location.coords.huntName}</Text>
+                        <Callout style={{flex: -1, position: 'absolute',width: 250}}>
+                            <Text>{searchLocation.coords.huntName}</Text>
                         </Callout>
                     </Marker>
                 </MapView>
