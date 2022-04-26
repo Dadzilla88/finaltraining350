@@ -40,7 +40,7 @@ app.put("/hunts", async function(request, response){
                 response.send("SUCCESS");
             }
         })
-        conn.end()
+        conn.end();
     }catch(error){
         console.log("An error occurred in path /hunts: "+error);
         response.send("ERROR");
@@ -65,9 +65,76 @@ app.get("/hunts", async function(request,response){
                 console.log("Result is "+result);
                 response.send(result);
             }
+
         })
+        conn.end();
     } catch(error){
         console.log("An error occurred in path /hunts: "+error);
+        response.send("ERROR");
+    }
+})
+
+app.get("/", async function(request,response){
+    try{
+        console.log("Request received in app.get /");
+    }catch(error){
+        console.log("An error has occurred in path /"+error);
+    }
+})
+
+app.put("/search",async function(request,response){
+    try {
+        console.log("Request received in /search");
+        let difficulty = request.body.difficulty;
+        let conn = mysql.createConnection({host:host,user:user,password:password,database:database});
+        await conn.connect();
+        let sql = "SELECT * FROM hunts WHERE difficulty ='"+difficulty+"';";
+        console.log("sql statement being used is "+sql);
+        await conn.query(sql,function(err,result){
+            if(err) console.log("An error occurred "+err);
+            else{
+                console.log("SUCCESS");
+                console.log("Result is: "+result);
+                response.send(result);
+            }
+
+        })
+        conn.end();
+    }catch(error){
+        console.log("An error occurred in path /search "+error);
+    }
+})
+
+app.post("/feedback", async function (request, response){
+    try{
+        console.log("Request received in app.post /feedback");
+        let conn = mysql.createConnection({host:host,user:user,password:password,database:database});
+        await conn.connect();
+
+        let feedbackList = request.body.list;
+        feedbackList.forEach(function(name){
+            let sql = "INSERT INTO feedback(feedbackName,feedbackValue) VALUES ('"+name+"','1');";
+            conn.query(sql,function(err,result){
+                if (err){
+                    console.log("Error occurred: "+err);
+                    let conn = mysql.createConnection({host:host,user:user,password:password,database:database});
+                    conn.connect();
+                    let sql2 = "UPDATE feedback SET feedbackValue = feedbackValue+1 WHERE feedbackName = '"+name+"';";
+                    conn.query(sql2,function(err2,result2){
+                        if(err2){
+                            console.log("err2 is : "+err2);
+                        }
+                        else console.log("Record successfully updated");
+
+                    })
+                }
+                else console.log("Record successfully updated");
+            });
+
+        })
+    conn.end();
+    }catch(error){
+        console.log("An error has occured in path /feedback: "+error);
         response.send("ERROR");
     }
 })

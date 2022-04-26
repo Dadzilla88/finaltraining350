@@ -23,7 +23,7 @@ export default function App() {
   );
   const [errorMsg, setErrorMsg] = useState(null);
   const [defaultloc, setDefaultloc] = useState(true);
-  const [answer, setAnswer] = useState('Yes');
+  const [answer, setAnswer] = useState(null);
 
   useEffect(()=>{
     (async () =>{
@@ -61,7 +61,7 @@ export default function App() {
           <Feedback setAnswer={setAnswer}/>
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
-          <MoreFeedback answer={answer}/>
+          <MoreFeedback answer={answer} />
         </View>
         <View style={[styles.container, { backgroundColor: '#CBF941' }]}>
           <Graph />

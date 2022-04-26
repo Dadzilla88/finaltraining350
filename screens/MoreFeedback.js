@@ -1,18 +1,36 @@
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {useEffect, useState} from "react";
 import {Checkbox} from 'react-native-paper';
+import axios from 'axios';
 
 
 
 
 export const MoreFeedback = ({answer}) =>{
 
-    const optionsList = ['Useful','Ease','Aesthetic']
-    const [checked, setChecked] = useState({
+
+
+    const [pChecked, setPChecked] = useState({
         Aesthetic: false,
         Ease: false,
         Useful: false
     });
+    const [nChecked, setNChecked] = useState({
+        Slow: false,
+        Crashes: false,
+        Ugly: false
+    });
+
+    const submitValues = (values) => {
+        let optionsList = [];
+        Object.keys(values).forEach(key=>{
+            if (values[key] === true){
+                optionsList.push(key);
+            };
+        })
+        const res = axios.post('http://10.0.2.2:4000/feedback',{list: optionsList})
+
+    }
 
 
 
@@ -22,48 +40,90 @@ export const MoreFeedback = ({answer}) =>{
             <>
                 <Text>Aesthetic</Text>
                 <Checkbox
-                    status={checked.Aesthetic ? 'checked' : 'unchecked'}
+                    status={pChecked.Aesthetic ? 'checked' : 'unchecked'}
                     onPress={()=>{
 
-                        setChecked({Aesthetic: !checked.Aesthetic,
-                        Ease: checked.Ease,
-                        Useful: checked.Useful});
+                        setPChecked({Aesthetic: !pChecked.Aesthetic,
+                        Ease: pChecked.Ease,
+                        Useful: pChecked.Useful});
                     }}
                     color={'green'}
                     uncheckColor={'red'}
                     />
                 <Text>Ease of Use</Text>
                 <Checkbox
-                    status={checked.Ease ? 'checked' : 'unchecked'}
+                    status={pChecked.Ease ? 'checked' : 'unchecked'}
                     onPress={()=>{
-                        setChecked({Ease: !checked.Ease,
-                        Aesthetic: checked.Aesthetic,
-                        Useful: checked.Useful});
+                        setPChecked({Ease: !pChecked.Ease,
+                        Aesthetic: pChecked.Aesthetic,
+                        Useful: pChecked.Useful});
                     }}
                     color={'green'}
                     uncheckColor={'red'}
                     />
                 <Text>Useful</Text>
                 <Checkbox
-                    status={checked.Useful ? 'checked' : 'unchecked'}
+                    status={pChecked.Useful ? 'checked' : 'unchecked'}
                     onPress={()=>{
-                        setChecked({Useful: !checked.Useful,
-                        Aesthetic: checked.Aesthetic,
-                        Ease: checked.Ease});
+                        setPChecked({Useful: !pChecked.Useful,
+                        Aesthetic: pChecked.Aesthetic,
+                        Ease: pChecked.Ease});
                     }}
                     color={'green'}
                     uncheckColor={'red'}
                     />
+                <Button
+                    onPress = {()=>{submitValues(pChecked)}} title="Submit Feedback"/>
                 </>
                 )
     }
-    else {
+    else if (answer === 'No'){
         return (
-            //TODO enter negative feedback multi select here
             <>
-                <Text>This is the MoreFeedback page</Text>
-                <Text>This is the value of answer: {answer}</Text>
+                <Text>Too Slow</Text>
+                <Checkbox
+                    status={nChecked.Slow ? 'checked' : 'unchecked'}
+                    onPress={()=>{
+
+                        setNChecked({Slow: !nChecked.Slow,
+                            Crashes: nChecked.Crashes,
+                            Ugly: nChecked.Ugly});
+                    }}
+                    color={'green'}
+                    uncheckColor={'red'}
+                />
+                <Text>Crashes</Text>
+                <Checkbox
+                    status={nChecked.Crashes ? 'checked' : 'unchecked'}
+                    onPress={()=>{
+                        setNChecked({Crashes: !nChecked.Crashes,
+                            Ugly: nChecked.Ugly,
+                            Slow: nChecked.Slow});
+                    }}
+                    color={'green'}
+                    uncheckColor={'red'}
+                />
+                <Text>Ugly</Text>
+                <Checkbox
+                    status={nChecked.Ugly ? 'checked' : 'unchecked'}
+                    onPress={()=>{
+                        setNChecked({Ugly: !nChecked.Ugly,
+                            Crashes: nChecked.Crashes,
+                            Slow: nChecked.Slow});
+                    }}
+                    color={'green'}
+                    uncheckColor={'red'}
+                />
+                <Button
+                    onPress = {()=>{submitValues(nChecked)}} title="Submit Feedback"/>
             </>
         )
     }
+    else{
+        return(
+        <>
+            <Text>Please return to previous page and indicate</Text>
+            <Text>whether you are satisfied with the app or not</Text>
+            </>
+    )}
 }

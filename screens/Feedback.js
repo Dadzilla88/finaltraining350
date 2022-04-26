@@ -15,7 +15,7 @@ export const Feedback = ({setAnswer}) =>{
             <Text>Are you happy with this application?</Text>
             <RadioForm
                 radio_props={radio_props}
-/*                initial={}*/
+                initial={-1}
                 onPress={(value) => {setAnswer(value)}}
                 />
         </View>
